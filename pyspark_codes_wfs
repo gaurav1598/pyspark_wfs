@@ -1,0 +1,594 @@
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 3.2.1
+      /_/
+
+Using Python version 3.8.10 (default, Jun 22 2022 20:18:18)
+Spark context Web UI available at http://bfbb26a75afc:4041
+Spark context available as 'sc' (master = local[*], app id = local-1695796920421).
+SparkSession available as 'spark'.
+>>> df=spark.read.csv(path='/config/workspace/student.csv',header=True)
+display(>>; 
+  File "<stdin>", line 1
+    ;
+    ^
+SyntaxError: invalid syntax
+>>> display(df)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'display' is not defined
+>>> df.show()
++---+------+-------+----------+
+| Id|  Name|Roll No|  Phone No|
++---+------+-------+----------+
+|  1|gaurav|     12|6457899845|
+|  2|maheer|     23|  34585965|
+|  3| anmol|     11|  24556663|
+|  4|suresh|     13| 556664896|
+|  5|   ram|     15| 635989965|
++---+------+-------+----------+
+
+>>> df.printSchema()
+root
+ |-- Id: string (nullable = true)
+ |-- Name: string (nullable = true)
+ |-- Roll No: string (nullable = true)
+ |-- Phone No: string (nullable = true)
+
+>>> from pyspark.sql import SparkSession
+>>> d
+>>> df.show()
++---+------+-------+----------+
+| Id|  Name|Roll No|  Phone No|
++---+------+-------+----------+
+|  1|gaurav|     12|6457899845|
+|  2|maheer|     23|  34585965|
+|  3| anmol|     11|  24556663|
+|  4|suresh|     13| 556664896|
+|  5|   ram|     15| 635989965|
++---+------+-------+----------+
+
+>>> python3 demo.py
+  File "<stdin>", line 1
+    python3 demo.py
+            ^
+SyntaxError: invalid syntax
+>>> from pyspark.sql.types import *
+>>> schema=StructType().add(field='id',data_type=IntegerType())\
+...                     add(field='id',data_type=IntegerType())\
+  File "<stdin>", line 2
+    schema=StructType().add(field='id',data_type=IntegerType())\
+                        add(field='id',data_type=IntegerType())\
+       ^
+SyntaxError: invalid syntax
+>>> schema=StructType().add(field='id',data_type=IntegerType())\
+...                             add(field='id',data_type=IntegerType())\
+  File "<stdin>", line 2
+    schema=StructType().add(field='id',data_type=IntegerType())\
+                                add(field='id',data_type=IntegerType())\
+        ^
+SyntaxError: invalid syntax
+>>> schema=StructType().add(field='id',data_type=IntegerType())\
+...             add(field='id',data_type=IntegerType())\
+  File "<stdin>", line 2
+    schema=StructType().add(field='id',data_type=IntegerType())\
+                add(field='id',data_type=IntegerType())\
+      ^
+SyntaxError: invalid syntax
+>>> schema=StructType().add(field='id',data_type=IntegerType())\
+...             add(field='id',data_type=IntegerType())\
+  File "<stdin>", line 2
+    schema=StructType().add(field='id',data_type=IntegerType())\
+                add(field='id',data_type=IntegerType())\
+      ^
+SyntaxError: invalid syntax
+>>> schema=StructType().add(field='id',data_type=IntegerType())\
+...             add(field='id',data_type=IntegerType())\
+  File "<stdin>", line 2
+    schema=StructType().add(field='id',data_type=IntegerType())\
+                add(field='id',data_type=IntegerType())\
+      ^
+SyntaxError: invalid syntax
+>>> schema=StructType().add(field='id',data_type=IntegerType())\
+...                    .add(field='id',data_type=IntegerType())\
+...                    .add(field='id',data_type=IntegerType())\;
+  File "<stdin>", line 3
+    .add(field='id',data_type=IntegerType())\;
+                                             ^
+SyntaxError: unexpected character after line continuation character
+>>> schema=StructType().add(field='id',data_type=IntegerType())\
+...                    .add(field='Name',data_type=StringType())\
+...                    .add(field='Roll No',data_type=IntegerType())\
+...                    .add(field='Phone No',data_type=IntegerType())\
+... ;
+>>> df=spark.read.csv(path='/config/workspace/student.csv',schema=schema,header=True)
+>>> df.show()
++---+------+-------+---------+
+| id|  Name|Roll No| Phone No|
++---+------+-------+---------+
+|  1|gaurav|     12|     null|
+|  2|maheer|     23| 34585965|
+|  3| anmol|     11| 24556663|
+|  4|suresh|     13|556664896|
+|  5|   ram|     15|635989965|
++---+------+-------+---------+
+
+>>> df.printSchema()
+root
+ |-- id: integer (nullable = true)
+ |-- Name: string (nullable = true)
+ |-- Roll No: integer (nullable = true)
+ |-- Phone No: integer (nullable = true)
+
+>>> df.write.option("header",True).txt("/config/workspace/studnt.txt")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'DataFrameWriter' object has no attribute 'txt'
+>>> df.write.option("header",True).csv("/config/workspace/studnt.txt")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/readwriter.py", line 955, in csv
+    self._jwrite.csv(path)
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: path file:/config/workspace/studnt.txt already exists.
+>>> df.write.option("header",True).csv("/config/workspace/studnt1.txt")
+>>> df.show()
++---+------+-------+---------+
+| id|  Name|Roll No| Phone No|
++---+------+-------+---------+
+|  1|gaurav|     12|     null|
+|  2|maheer|     23| 34585965|
+|  3| anmol|     11| 24556663|
+|  4|suresh|     13|556664896|
+|  5|   ram|     15|635989965|
++---+------+-------+---------+
+
+>>> df.write.option("header",True).csv("Libraries\Documents")
+>>> df1=[(1,'gaurav'),(2,'sashank')]
+>>> schema=['id','name']
+>>> data=spark.createDataFrame(data=df1,schema=schema)
+>>> data.show()
++---+-------+
+| id|   name|
++---+-------+
+|  1| gaurav|
+|  2|sashank|
++---+-------+
+
+>>> data.write.option("header",True).csv("/config/workspace/loaddata.csv")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/readwriter.py", line 955, in csv
+    self._jwrite.csv(path)
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: path file:/config/workspace/loaddata.csv already exists.
+>>> data.write.option("header",True).csv("/config/workspace/loaddata1.csv")
+>>> data.write.options(header='True',delimiter=','),csv("config/workspace/dd1") 
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'csv' is not defined
+>>> data.write.options(header='True',delimiter=',').csv("config/workspace/dd1")
+>>> data.show()                                                                 
++---+-------+
+| id|   name|
++---+-------+
+|  1| gaurav|
+|  2|sashank|
++---+-------+
+
+>>> df=spark.read.json('/config/workspace/dwsample1-json.json')
+>>> df.show()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/dataframe.py", line 494, in show
+    print(self._jdf.showString(n, 20, vertical))
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: 
+Since Spark 2.3, the queries from raw JSON/CSV files are disallowed when the
+referenced columns only include the internal corrupt record column
+(named _corrupt_record by default). For example:
+spark.read.schema(schema).csv(file).filter($"_corrupt_record".isNotNull).count()
+and spark.read.schema(schema).csv(file).select("_corrupt_record").show().
+Instead, you can cache or save the parsed results and then send the same query.
+For example, val df = spark.read.schema(schema).csv(file).cache() and then
+df.filter($"_corrupt_record".isNotNull).count().
+      
+>>> df.printschema()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/dataframe.py", line 1659, in __getattr__
+    raise AttributeError(
+AttributeError: 'DataFrame' object has no attribute 'printschema'
+>>> df.printSchema()
+root
+ |-- _corrupt_record: string (nullable = true)
+
+>>> df4=spark.read.json('/config/workspace/dwsample1-json.json',multiLine=True)
+>>> df4.show()
++-----+-----+-----+
+|color|fruit| size|
++-----+-----+-----+
+|  Red|Apple|Large|
++-----+-----+-----+
+
+>>> df.show()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/dataframe.py", line 494, in show
+    print(self._jdf.showString(n, 20, vertical))
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: 
+Since Spark 2.3, the queries from raw JSON/CSV files are disallowed when the
+referenced columns only include the internal corrupt record column
+(named _corrupt_record by default). For example:
+spark.read.schema(schema).csv(file).filter($"_corrupt_record".isNotNull).count()
+and spark.read.schema(schema).csv(file).select("_corrupt_record").show().
+Instead, you can cache or save the parsed results and then send the same query.
+For example, val df = spark.read.schema(schema).csv(file).cache() and then
+df.filter($"_corrupt_record".isNotNull).count().
+      
+>>> df.write.option("header",True).csv("/config/workspace/studnt1.txt")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/readwriter.py", line 955, in csv
+    self._jwrite.csv(path)
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: path file:/config/workspace/studnt1.txt already exists.
+>>> drop df
+  File "<stdin>", line 1
+    drop df
+         ^
+SyntaxError: invalid syntax
+>>> df.drop()
+DataFrame[_corrupt_record: string]
+>>> df.show(0
+... df.show()
+  File "<stdin>", line 2
+    df.show()
+    ^
+SyntaxError: invalid syntax
+>>> df.show()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/dataframe.py", line 494, in show
+    print(self._jdf.showString(n, 20, vertical))
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: 
+Since Spark 2.3, the queries from raw JSON/CSV files are disallowed when the
+referenced columns only include the internal corrupt record column
+(named _corrupt_record by default). For example:
+spark.read.schema(schema).csv(file).filter($"_corrupt_record".isNotNull).count()
+and spark.read.schema(schema).csv(file).select("_corrupt_record").show().
+Instead, you can cache or save the parsed results and then send the same query.
+For example, val df = spark.read.schema(schema).csv(file).cache() and then
+df.filter($"_corrupt_record".isNotNull).count().
+      
+>>> df.write.option("header",True).csv("/config/workspace/studnt1.txt")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/readwriter.py", line 955, in csv
+    self._jwrite.csv(path)
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: path file:/config/workspace/studnt1.txt already exists.
+>>> dfstu.write.option("header",True).csv("/config/workspace/studnt1.txt")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'dfstu' is not defined
+>>> df4.printSchema()
+root
+ |-- color: string (nullable = true)
+ |-- fruit: string (nullable = true)
+ |-- size: string (nullable = true)
+
+>>> df4.show()
++-----+-----+-----+
+|color|fruit| size|
++-----+-----+-----+
+|  Red|Apple|Large|
++-----+-----+-----+
+
+>>> df5=spark.read.json('/config/workspace/dwsample2-json.json')
+>>> df5.show()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/dataframe.py", line 494, in show
+    print(self._jdf.showString(n, 20, vertical))
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: 
+Since Spark 2.3, the queries from raw JSON/CSV files are disallowed when the
+referenced columns only include the internal corrupt record column
+(named _corrupt_record by default). For example:
+spark.read.schema(schema).csv(file).filter($"_corrupt_record".isNotNull).count()
+and spark.read.schema(schema).csv(file).select("_corrupt_record").show().
+Instead, you can cache or save the parsed results and then send the same query.
+For example, val df = spark.read.schema(schema).csv(file).cache() and then
+df.filter($"_corrupt_record".isNotNull).count().
+      
+>>> df5=spark.read.json('/config/workspace/dwsample2-json.json',miltiLine=True)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: json() got an unexpected keyword argument 'miltiLine'
+>>> df5=spark.read.json('/config/workspace/dwsample2-json.json',multiLine=True)
+>>> df5.show()
++--------------------+
+|                quiz|
++--------------------+
+|{{{12, [10, 11, 1...|
++--------------------+
+
+>>> df5.show()
++--------------------+
+|                quiz|
++--------------------+
+|{{{12, [10, 11, 1...|
++--------------------+
+
+>>> df4.show()
++-----+-----+-----+
+|color|fruit| size|
++-----+-----+-----+
+|  Red|Apple|Large|
++-----+-----+-----+
+
+>>> df5=spark.read.json('/config/workspace/dwsample1-json.json',multiLine=True)
+>>> df5.show()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/dataframe.py", line 494, in show
+    print(self._jdf.showString(n, 20, vertical))
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: 
+Since Spark 2.3, the queries from raw JSON/CSV files are disallowed when the
+referenced columns only include the internal corrupt record column
+(named _corrupt_record by default). For example:
+spark.read.schema(schema).csv(file).filter($"_corrupt_record".isNotNull).count()
+and spark.read.schema(schema).csv(file).select("_corrupt_record").show().
+Instead, you can cache or save the parsed results and then send the same query.
+For example, val df = spark.read.schema(schema).csv(file).cache() and then
+df.filter($"_corrupt_record".isNotNull).count().
+      
+>>> df_k.read.json('/config/workspace/dwsample1-json.json',multiLine=True)True)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'spar_k' is not defined
+>>> df5=sparn('/config/workspace/dwsample1-json.json',multiLine=True)Line=True)
+[1]+  Stopped                 pyspark
+abc@bfbb26a75afc:~/workspace$ pyspark
+Python 3.8.10 (default, Jun 22 2022, 20:18:18) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+23/09/27 15:58:40 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 3.2.1
+      /_/
+
+Using Python version 3.8.10 (default, Jun 22 2022 20:18:18)
+Spark context Web UI available at http://bfbb26a75afc:4040
+Spark context available as 'sc' (master = local[*], app id = local-1695810521344).
+SparkSession available as 'spark'.
+>>> dfjson=spark.read.json('/config/workspace/dwsample1-json.json',multiLine=True)
+>>> dfjson.show()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/dataframe.py", line 494, in show
+    print(self._jdf.showString(n, 20, vertical))
+  File "/usr/local/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1321, in __call__
+  File "/usr/local/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: 
+Since Spark 2.3, the queries from raw JSON/CSV files are disallowed when the
+referenced columns only include the internal corrupt record column
+(named _corrupt_record by default). For example:
+spark.read.schema(schema).csv(file).filter($"_corrupt_record".isNotNull).count()
+and spark.read.schema(schema).csv(file).select("_corrupt_record").show().
+Instead, you can cache or save the parsed results and then send the same query.
+For example, val df = spark.read.schema(schema).csv(file).cache() and then
+df.filter($"_corrupt_record".isNotNull).count().
+      
+>>> data=[(1,'gaurav'),(2,'rahul')]
+>>> schema=['id','name']
+>>> df=spark.createDataFrame(data=data,schema=schema)
+>>> df.show()
++---+------+                                                                    
+| id|  name|
++---+------+
+|  1|gaurav|
+|  2| rahul|
++---+------+
+
+>>> df.write.json('/config/workspace/dwsample2-json.json'overwrite)
+  File "<stdin>", line 1
+    df.write.json('/config/workspace/dwsample2-json.json'overwrite)
+                                                         ^
+SyntaxError: invalid syntax
+>>> df.write.json('/config/workspace/dwsample2-json.json'overwrite')
+  File "<stdin>", line 1
+    df.write.json('/config/workspace/dwsample2-json.json'overwrite')
+                                                         ^
+SyntaxError: invalid syntax
+>>> df.write.json('/config/workspace/dwsample2-json.json,overwrite=True)
+  File "<stdin>", line 1
+    df.write.json('/config/workspace/dwsample2-json.jso,overwrite=True)
+                                                                      ^
+SyntaxError: EOL while scanning string literal
+>>> df.write.json('/config/workspace/dwsample2-json,overwrite=True)
+  File "<stdin>", line 1
+    df.write.json('/config/workspace/dwsample2-json,overwrite=True)
+                                                                  ^
+SyntaxError: EOL while scanning string literal
+>>> df.write.json('/config/workspace/dwsample2-json,'overwrite'=True)
+  File "<stdin>", line 1
+    df.write.json('/config/workspace/dwsample2-json,'overwrite'=True)
+                                                     ^
+SyntaxError: invalid syntax
+>>> df.write.json('/config/workspace/dwsample2-json)
+  File "<stdin>", line 1
+    df.write.json('/config/workspace/dwsample2-json)
+                                                   ^
+SyntaxError: EOL while scanning string literal
+>>> df.write.json('/config/workspace/dwsample2-json')
+>>> df1.read.json('/config/workspace/dwsample2-json'
+... ;
+  File "<stdin>", line 2
+    ;
+    ^
+SyntaxError: invalid syntax
+>>> df1.show()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'df1' is not defined
+>>> df1.read.json('/config/workspace/dwsample2-json')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'df1' is not defined
+>>> df11=spark.read.json('/config/workspace/dwsample2-json')
+>>> df11.show()
++---+------+
+| id|  name|
++---+------+
+|  1|gaurav|
+|  2| rahul|
++---+------+
+
+>>> dfs_state=spark.read.json('/config/workspace/dwsample1-json.json','multiline'=True)
+  File "<stdin>", line 1
+SyntaxError: expression cannot contain assignment, perhaps you meant "=="?
+>>> dfs_state=spark.read.json('/config/workspace/dwsample1-json.json',multiline=True)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: json() got an unexpected keyword argument 'multiline'
+>>> dfs_state=spark.read.json('/config/workspace/dwsample1-json.json',multiLine=True)
+>>> dfs_state.show()
++--------------------+
+|              states|
++--------------------+
+|[{AL, Alabama}, {...|
++--------------------+
+
+>>> dfs_state.show(5)
++--------------------+
+|              states|
++--------------------+
+|[{AL, Alabama}, {...|
++--------------------+
+
+>>> dfs_state.show(1)
++--------------------+
+|              states|
++--------------------+
+|[{AL, Alabama}, {...|
++--------------------+
+
+>>> df_parquet=spark.read.parquet('/config/workspace/userdata1.parquet')
+>>> df_parquet.show()
++-------------------+---+----------+---------+--------------------+------+---------------+-------------------+--------------------+----------+---------+--------------------+--------------------+
+|  registration_dttm| id|first_name|last_name|               email|gender|     ip_address|                 cc|             country| birthdate|   salary|               title|            comments|
++-------------------+---+----------+---------+--------------------+------+---------------+-------------------+--------------------+----------+---------+--------------------+--------------------+
+|2016-02-03 13:25:29|  1|    Amanda|   Jordan|    ajordan0@com.com|Female|    1.197.201.2|   6759521864920116|           Indonesia|  3/8/1971| 49756.53|    Internal Auditor|               1E+02|
+|2016-02-03 22:34:03|  2|    Albert|  Freeman|     afreeman1@is.gd|  Male| 218.111.175.34|                   |              Canada| 1/16/1968|150280.17|       Accountant IV|                    |
+|2016-02-03 06:39:31|  3|    Evelyn|   Morgan|emorgan2@altervis...|Female|   7.161.136.94|   6767119071901597|              Russia|  2/1/1960|144972.51| Structural Engineer|                    |
+|2016-02-03 06:06:21|  4|    Denise|    Riley|    driley3@gmpg.org|Female|  140.35.109.83|   3576031598965625|               China|  4/8/1997| 90263.05|Senior Cost Accou...|                    |
+|2016-02-03 10:35:31|  5|    Carlos|    Burns|cburns4@miitbeian...|      | 169.113.235.40|   5602256255204850|        South Africa|          |     null|                    |                    |
+|2016-02-03 12:52:34|  6|   Kathryn|    White|  kwhite5@google.com|Female| 195.131.81.179|   3583136326049310|           Indonesia| 2/25/1983| 69227.11|   Account Executive|                    |
+|2016-02-03 14:03:08|  7|    Samuel|   Holmes|sholmes6@foxnews.com|  Male| 232.234.81.197|   3582641366974690|            Portugal|12/18/1987| 14247.62|Senior Financial ...|                    |
+|2016-02-03 12:17:06|  8|     Harry|   Howell| hhowell7@eepurl.com|  Male|   91.235.51.73|                   |Bosnia and Herzeg...|  3/1/1962|186469.43|    Web Developer IV|                    |
+|2016-02-03 09:22:53|  9|      Jose|   Foster|   jfoster8@yelp.com|  Male|   132.31.53.61|                   |         South Korea| 3/27/1992|231067.84|Software Test Eng...|               1E+02|
+|2016-02-03 23:59:47| 10|     Emily|  Stewart|estewart9@opensou...|Female| 143.28.251.245|   3574254110301671|             Nigeria| 1/28/1997| 27234.28|     Health Coach IV|                    |
+|2016-02-03 05:40:42| 11|     Susan|  Perkins| sperkinsa@patch.com|Female|    180.85.0.62|   3573823609854134|              Russia|          |210001.95|                    |                    |
+|2016-02-03 23:34:34| 12|     Alice|    Berry|aberryb@wikipedia...|Female| 246.225.12.189|   4917830851454417|               China| 8/12/1968| 22944.53|    Quality Engineer|                    |
+|2016-02-04 00:18:17| 13|    Justin|    Berry|jberryc@usatoday.com|  Male|   157.7.146.43|6331109912871813274|              Zambia| 8/15/1975| 44165.46|Structural Analys...|                    |
+|2016-02-04 03:16:52| 14|     Kathy| Reynolds|kreynoldsd@redcro...|Female|  81.254.172.13|   5537178462965976|Bosnia and Herzeg...| 6/27/1970|286592.99|           Librarian|                    |
+|2016-02-03 14:23:23| 15|   Dorothy|   Hudson|dhudsone@blogger.com|Female|       8.59.7.0|   3542586858224170|               Japan|12/20/1989|157099.71|  Nurse Practicioner|<script>alert('hi...|
+|2016-02-03 06:14:01| 16|     Bruce|   Willis|bwillisf@bluehost...|  Male|239.182.219.189|   3573030625927601|              Brazil|          |239100.65|                    |                    |
+|2016-02-03 06:27:45| 17|     Emily|  Andrews|eandrewsg@cornell...|Female| 29.231.180.172|     30271790537626|              Russia| 4/13/1990|116800.65|        Food Chemist|                    |
+|2016-02-03 22:14:24| 18|   Stephen|  Wallace|swallaceh@netvibe...|  Male|  152.49.213.62|   5433943468526428|             Ukraine| 1/15/1978|248877.99|Account Represent...|                    |
+|2016-02-03 17:15:54| 19|  Clarence|   Lawson|clawsoni@vkontakt...|  Male| 107.175.15.152|   3544052814080964|              Russia|          |177122.99|                    |                    |
+|2016-02-03 16:00:36| 20|   Rebecca|     Bell| rbellj@bandcamp.com|Female|172.215.104.127|                   |               China|          |137251.19|                    |                    |
++-------------------+---+----------+---------+--------------------+------+---------------+-------------------+--------------------+----------+---------+--------------------+--------------------+
+only showing top 20 rows
+
+>>> df_parquet.printSchema()
+root
+ |-- registration_dttm: timestamp (nullable = true)
+ |-- id: integer (nullable = true)
+ |-- first_name: string (nullable = true)
+ |-- last_name: string (nullable = true)
+ |-- email: string (nullable = true)
+ |-- gender: string (nullable = true)
+ |-- ip_address: string (nullable = true)
+ |-- cc: string (nullable = true)
+ |-- country: string (nullable = true)
+ |-- birthdate: string (nullable = true)
+ |-- salary: double (nullable = true)
+ |-- title: string (nullable = true)
+ |-- comments: string (nullable = true)
+
+>>> df_parquet()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'DataFrame' object is not callable
+>>> df_parquet.count()
+1000
+>>> df_parquet.spark.write('/config/workspace/dummy_data.parquet')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/spark/python/pyspark/sql/dataframe.py", line 1659, in __getattr__
+    raise AttributeError(
+AttributeError: 'DataFrame' object has no attribute 'spark'
+>>> df_parquet.write.parquet('/config/workspace/dummy_data.parquet')
+>>> dfpa=spark.read.parquet('/config/workspace/dummy_data.parquet')
+>>> dfpa.show()
++-------------------+---+----------+---------+--------------------+------+---------------+-------------------+--------------------+----------+---------+--------------------+--------------------+
+|  registration_dttm| id|first_name|last_name|               email|gender|     ip_address|                 cc|             country| birthdate|   salary|               title|            comments|
++-------------------+---+----------+---------+--------------------+------+---------------+-------------------+--------------------+----------+---------+--------------------+--------------------+
+|2016-02-03 13:25:29|  1|    Amanda|   Jordan|    ajordan0@com.com|Female|    1.197.201.2|   6759521864920116|           Indonesia|  3/8/1971| 49756.53|    Internal Auditor|               1E+02|
+|2016-02-03 22:34:03|  2|    Albert|  Freeman|     afreeman1@is.gd|  Male| 218.111.175.34|                   |              Canada| 1/16/1968|150280.17|       Accountant IV|                    |
+|2016-02-03 06:39:31|  3|    Evelyn|   Morgan|emorgan2@altervis...|Female|   7.161.136.94|   6767119071901597|              Russia|  2/1/1960|144972.51| Structural Engineer|                    |
+|2016-02-03 06:06:21|  4|    Denise|    Riley|    driley3@gmpg.org|Female|  140.35.109.83|   3576031598965625|               China|  4/8/1997| 90263.05|Senior Cost Accou...|                    |
+|2016-02-03 10:35:31|  5|    Carlos|    Burns|cburns4@miitbeian...|      | 169.113.235.40|   5602256255204850|        South Africa|          |     null|                    |                    |
+|2016-02-03 12:52:34|  6|   Kathryn|    White|  kwhite5@google.com|Female| 195.131.81.179|   3583136326049310|           Indonesia| 2/25/1983| 69227.11|   Account Executive|                    |
+|2016-02-03 14:03:08|  7|    Samuel|   Holmes|sholmes6@foxnews.com|  Male| 232.234.81.197|   3582641366974690|            Portugal|12/18/1987| 14247.62|Senior Financial ...|                    |
+|2016-02-03 12:17:06|  8|     Harry|   Howell| hhowell7@eepurl.com|  Male|   91.235.51.73|                   |Bosnia and Herzeg...|  3/1/1962|186469.43|    Web Developer IV|                    |
+|2016-02-03 09:22:53|  9|      Jose|   Foster|   jfoster8@yelp.com|  Male|   132.31.53.61|                   |         South Korea| 3/27/1992|231067.84|Software Test Eng...|               1E+02|
+|2016-02-03 23:59:47| 10|     Emily|  Stewart|estewart9@opensou...|Female| 143.28.251.245|   3574254110301671|             Nigeria| 1/28/1997| 27234.28|     Health Coach IV|                    |
+|2016-02-03 05:40:42| 11|     Susan|  Perkins| sperkinsa@patch.com|Female|    180.85.0.62|   3573823609854134|              Russia|          |210001.95|                    |                    |
+|2016-02-03 23:34:34| 12|     Alice|    Berry|aberryb@wikipedia...|Female| 246.225.12.189|   4917830851454417|               China| 8/12/1968| 22944.53|    Quality Engineer|                    |
+|2016-02-04 00:18:17| 13|    Justin|    Berry|jberryc@usatoday.com|  Male|   157.7.146.43|6331109912871813274|              Zambia| 8/15/1975| 44165.46|Structural Analys...|                    |
+|2016-02-04 03:16:52| 14|     Kathy| Reynolds|kreynoldsd@redcro...|Female|  81.254.172.13|   5537178462965976|Bosnia and Herzeg...| 6/27/1970|286592.99|           Librarian|                    |
+|2016-02-03 14:23:23| 15|   Dorothy|   Hudson|dhudsone@blogger.com|Female|       8.59.7.0|   3542586858224170|               Japan|12/20/1989|157099.71|  Nurse Practicioner|<script>alert('hi...|
+|2016-02-03 06:14:01| 16|     Bruce|   Willis|bwillisf@bluehost...|  Male|239.182.219.189|   3573030625927601|              Brazil|          |239100.65|                    |                    |
+|2016-02-03 06:27:45| 17|     Emily|  Andrews|eandrewsg@cornell...|Female| 29.231.180.172|     30271790537626|              Russia| 4/13/1990|116800.65|        Food Chemist|                    |
+|2016-02-03 22:14:24| 18|   Stephen|  Wallace|swallaceh@netvibe...|  Male|  152.49.213.62|   5433943468526428|             Ukraine| 1/15/1978|248877.99|Account Represent...|                    |
+|2016-02-03 17:15:54| 19|  Clarence|   Lawson|clawsoni@vkontakt...|  Male| 107.175.15.152|   3544052814080964|              Russia|          |177122.99|                    |                    |
+|2016-02-03 16:00:36| 20|   Rebecca|     Bell| rbellj@bandcamp.com|Female|172.215.104.127|                   |               China|          |137251.19|                    |                    |
++-------------------+---+----------+---------+--------------------+------+---------------+-------------------+--------------------+----------+---------+--------------------+--------------------+
+only showing top 20 rows
+
+>>> dfpa.count()
+1000
+>>> 
